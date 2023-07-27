@@ -69,7 +69,7 @@ entry_telefone.grid(row=2, column=1, padx=10, pady=5)
 text_descricao = tk.Text(root, height=5, width=30)
 text_descricao.grid(row=3, column=1, padx=10, pady=5)
 
-# Botões
+# Botõess
 btn_criar_pedido = tk.Button(root, text="Criar Pedido", command=criar_pedido)
 btn_criar_pedido.grid(row=4, column=0, padx=10, pady=10)
 btn_exibir_pedidos = tk.Button(root, text="Exibir Pedidos", command=exibir_pedidos)
