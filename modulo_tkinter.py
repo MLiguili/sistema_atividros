@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
 
+
 class Pedido:
     def __init__(self, nome, sobrenome, telefone, descricao):
         self.nome = nome
         self.sobrenome = sobrenome
         self.telefone = telefone
         self.descricao = descricao
+
 
 def criar_pedido():
     nome = entry_nome.get()
@@ -22,6 +24,7 @@ def criar_pedido():
     else:
         messagebox.showwarning("Erro", "Preencha todos os campos!")
 
+
 def exibir_pedidos():
     if not pedidos:
         messagebox.showinfo("Sem Pedidos", "Ainda não há pedidos registrados.")
@@ -35,11 +38,13 @@ def exibir_pedidos():
             pedidos_text += "--------------------------\n"
         messagebox.showinfo("Pedidos Registrados", pedidos_text)
 
+
 def limpar_campos():
     entry_nome.delete(0, "end")
     entry_sobrenome.delete(0, "end")
     entry_telefone.delete(0, "end")
     text_descricao.delete("1.0", "end")
+
 
 pedidos = []
 
