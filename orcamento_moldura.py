@@ -44,7 +44,7 @@ class Quadro:
 def orcamento_molduras():
     print('Orçamento molduras')
     codigo = 2016  #input("Qual o modelo?")
-    valor_md = 30  #input("Qual o valor")
+    valor_md = input("Qual o valor da Moldura?")
     alt = int(input("Qual a altura?\n"))
     larg = int(input("Qual a largura?\n"))
     vidro_tipo = input("Que Tipo de Vidro: 1-Comum, 2-Anti-reflexo, 3- com Paspatour\n")
