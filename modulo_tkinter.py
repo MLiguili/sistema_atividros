@@ -1,86 +1,88 @@
+import math
 import tkinter as tk
-from tkinter import messagebox
 
+class Quadro:
 
-class Pedido:
-    def __init__(self, nome, sobrenome, telefone, descricao):
-        self.nome = nome
-        self.sobrenome = sobrenome
-        self.telefone = telefone
-        self.descricao = descricao
+    def __init__(self, codigo, valor_md, vidro_tipo, alt, larg):
+        self.codigo = str(codigo)
+        self.valor_md = int(valor_md)
+        self.vidro_tipo = vidro_tipo
+        self.alt = int(alt)/100
+        self.larg = int(larg)/100
+        self.perimetro = math.ceil((self.larg + self.alt) * 2)
+        self.valor_quadro()
 
+    def get_perimetro(self):
+        print(self.perimetro)
 
-def criar_pedido():
-    nome = entry_nome.get()
-    sobrenome = entry_sobrenome.get()
-    telefone = entry_telefone.get()
-    descricao = text_descricao.get("1.0", "end").strip()
+    def calc_md(self):
+        calculo = self.perimetro*self.valor_md
+        return calculo
 
-    if nome and sobrenome and telefone and descricao:
-        pedido = Pedido(nome, sobrenome, telefone, descricao)
-        pedidos.append(pedido)
-        limpar_campos()
-        messagebox.showinfo("Sucesso", "Pedido registrado com sucesso!")
-    else:
-        messagebox.showwarning("Erro", "Preencha todos os campos!")
+    def calc_vidro(self):
+        area = self.alt * self.larg
+        if self.vidro_tipo == "1":
+            valor_vidro = 250
+            return area * valor_vidro
+        if self.vidro_tipo == "2":
+            valor_vidro = 300
+            return area * valor_vidro
+        if self.vidro_tipo == "3":
+            valor_vidro = 350
+            return area * valor_vidro
 
+    def valor_quadro(self):
+        vidro = self.calc_vidro()
+        moldura = self.calc_md()
+        valor = vidro + moldura
+        return valor
 
-def exibir_pedidos():
-    if not pedidos:
-        messagebox.showinfo("Sem Pedidos", "Ainda não há pedidos registrados.")
-    else:
-        pedidos_text = ""
-        for i, pedido in enumerate(pedidos, 1):
-            pedidos_text += f"Pedido {i}:\n"
-            pedidos_text += f"Nome do Cliente: {pedido.nome} {pedido.sobrenome}\n"
-            pedidos_text += f"Telefone: {pedido.telefone}\n"
-            pedidos_text += f"Descrição do Pedido: {pedido.descricao}\n"
-            pedidos_text += "--------------------------\n"
-        messagebox.showinfo("Pedidos Registrados", pedidos_text)
+def calcular_orcamento():
+    codigo = codigo_entry.get()
+    valor_md = valor_md_entry.get()
+    altura = altura_entry.get()
+    largura = largura_entry.get()
+    vidro_tipo = vidro_tipo_var.get()
 
+    quadro = Quadro(codigo, valor_md, vidro_tipo, altura, largura)
+    valor_total = quadro.valor_quadro()
 
-def limpar_campos():
-    entry_nome.delete(0, "end")
-    entry_sobrenome.delete(0, "end")
-    entry_telefone.delete(0, "end")
-    text_descricao.delete("1.0", "end")
+    resultado_var.set(f"Valor do quadro: R${valor_total:.2f}")
 
-
-pedidos = []
-
-# Configuração da janela principal
 root = tk.Tk()
-root.title("Gerador de Pedidos")
+root.title("Orçamento de Molduras")
 
-# Etiquetas
-label_nome = tk.Label(root, text="Nome:")
-label_nome.grid(row=0, column=0, sticky="e")
-label_sobrenome = tk.Label(root, text="Sobrenome:")
-label_sobrenome.grid(row=1, column=0, sticky="e")
-label_telefone = tk.Label(root, text="Telefone:")
-label_telefone.grid(row=2, column=0, sticky="e")
-label_descricao = tk.Label(root, text="Descrição:")
-label_descricao.grid(row=3, column=0, sticky="e")
+# Labels e Entradas
+tk.Label(root, text="Código:").grid(row=0, column=0)
+codigo_entry = tk.Entry(root)
+codigo_entry.grid(row=0, column=1)
 
-# Entradas de texto
-entry_nome = tk.Entry(root)
-entry_nome.grid(row=0, column=1, padx=10, pady=5)
-entry_sobrenome = tk.Entry(root)
-entry_sobrenome.grid(row=1, column=1, padx=10, pady=5)
-entry_telefone = tk.Entry(root)
-entry_telefone.grid(row=2, column=1, padx=10, pady=5)
+tk.Label(root, text="Valor da moldura:").grid(row=1, column=0)
+valor_md_entry = tk.Entry(root)
+valor_md_entry.grid(row=1, column=1)
 
-# Área de texto
-text_descricao = tk.Text(root, height=5, width=30)
-text_descricao.grid(row=3, column=1, padx=10, pady=5)
+tk.Label(root, text="Altura (cm):").grid(row=2, column=0)
+altura_entry = tk.Entry(root)
+altura_entry.grid(row=2, column=1)
 
-# Botõess
-btn_criar_pedido = tk.Button(root, text="Criar Pedido", command=criar_pedido)
-btn_criar_pedido.grid(row=4, column=0, padx=10, pady=10)
-btn_exibir_pedidos = tk.Button(root, text="Exibir Pedidos", command=exibir_pedidos)
-btn_exibir_pedidos.grid(row=4, column=1, padx=10, pady=10)
-btn_limpar_campos = tk.Button(root, text="Limpar Campos", command=limpar_campos)
-btn_limpar_campos.grid(row=4, column=2, padx=10, pady=10)
+tk.Label(root, text="Largura (cm):").grid(row=3, column=0)
+largura_entry = tk.Entry(root)
+largura_entry.grid(row=3, column=1)
 
-# Executar o loop principal da janela
+tk.Label(root, text="Tipo de vidro:").grid(row=4, column=0)
+vidro_tipo_var = tk.StringVar()
+vidro_tipo_var.set("1")
+vidro_tipo_menu = tk.OptionMenu(root, vidro_tipo_var, "1", "2", "3")
+vidro_tipo_menu.grid(row=4, column=1)
+
+# Botão de cálculo
+calcular_button = tk.Button(root, text="Calcular Orçamento", command=calcular_orcamento)
+calcular_button.grid(row=5, columnspan=2, pady=10)
+
+# Resultado
+resultado_var = tk.StringVar()
+resultado_var.set("Valor do quadro: R$0.00")
+resultado_label = tk.Label(root, textvariable=resultado_var, font=("Helvetica", 12, "bold"))
+resultado_label.grid(row=6, columnspan=2)
+
 root.mainloop()
