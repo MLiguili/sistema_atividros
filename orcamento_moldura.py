@@ -1,4 +1,5 @@
 import math
+from valores import lista_molduras
 
 
 class Quadro:
@@ -7,9 +8,9 @@ class Quadro:
         self.codigo = str(codigo)
         self.valor_md = int(valor_md)
         self.vidro_tipo = vidro_tipo
-        self.alt = int(alt)/100
-        self.larg = int(larg)/100
-        self.perimetro = math.ceil((self.larg + self.alt) * 2)
+        self.alt = float(alt)/100 * 10000 # aceito sugestões
+        self.larg = float(larg)/100 * 10000 # aceito sugestões
+        self.perimetro = (self.larg + self.alt) * 2 /10000
         self.valor_quadro()
 
     def get_perimetro(self):
@@ -20,7 +21,7 @@ class Quadro:
         return calculo
 
     def calc_vidro(self):
-        area = self.alt * self.larg
+        area = self.alt * self.larg / 10000 / 10000
         if self.vidro_tipo == "1":
             valor_vidro = 250
             return area * valor_vidro
@@ -35,18 +36,18 @@ class Quadro:
         vidro = self.calc_vidro()
         moldura = self.calc_md()
         valor = vidro + moldura
-        print("Valor do vidro:R$", vidro)
-        print("Valor do moldura:R$", moldura)
-        print("Valor Quadro:R$", valor)
+        print(f"Valor do vidro:R$ {vidro:.2f}")
+        print(f"Valor do moldura:R$ {moldura:.2f}")
+        print(f"Valor Quadro:R$ {valor:.2f}")
         print("____________")
 
 
 def orcamento_molduras():
     print('Orçamento molduras')
-    codigo = 2016  #input("Qual o modelo?")
-    valor_md = input("Qual o valor da Moldura?")
-    alt = int(input("Qual a altura?\n"))
-    larg = int(input("Qual a largura?\n"))
+    codigo = input("Qual o modelo?")
+    valor_md = lista_molduras.get(f'{codigo}')
+    alt = input("Qual a altura em cm?\n")
+    larg = input("Qual a largura em cm?\n")
     vidro_tipo = input("Que Tipo de Vidro: 1-Comum, 2-Anti-reflexo, 3- com Paspatour\n")
     quadro = Quadro(codigo, valor_md, vidro_tipo, alt, larg)
     return quadro
