@@ -1,6 +1,7 @@
 import math
 import tkinter as tk
 
+
 class Quadro:
 
     def __init__(self, codigo, valor_md, vidro_tipo, alt, larg):
@@ -37,6 +38,7 @@ class Quadro:
         valor = vidro + moldura
         return valor
 
+
 def calcular_orcamento():
     codigo = codigo_entry.get()
     valor_md = valor_md_entry.get()
@@ -48,6 +50,7 @@ def calcular_orcamento():
     valor_total = quadro.valor_quadro()
 
     resultado_var.set(f"Valor do quadro: R${valor_total:.2f}")
+
 
 root = tk.Tk()
 root.title("Orçamento de Molduras")

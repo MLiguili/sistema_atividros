@@ -1,6 +1,7 @@
 from orcamento_moldura import orcamento_molduras
 from orcamento_espelho import orcamento_espelhos
 
+
 def menu():
     while True:
         opcao = input("Selecione a opção: (M)olduras, (E)spelhos, (S)air \n").casefold()

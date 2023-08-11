@@ -1,4 +1,3 @@
-import math
 from valores import lista_molduras
 
 
@@ -8,9 +7,9 @@ class Quadro:
         self.codigo = str(codigo)
         self.valor_md = int(valor_md)
         self.vidro_tipo = vidro_tipo
-        self.alt = float(alt)/100 * 10000 # aceito sugestões
-        self.larg = float(larg)/100 * 10000 # aceito sugestões
-        self.perimetro = (self.larg + self.alt) * 2 /10000
+        self.alt = float(alt)/100 * 10000  # aceito sugestões
+        self.larg = float(larg)/100 * 10000  # aceito sugestões
+        self.perimetro = (self.larg + self.alt) * 2 / 10000
         self.valor_quadro()
 
     def get_perimetro(self):

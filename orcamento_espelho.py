@@ -21,8 +21,8 @@ class Espelho:
 
 def define_tipo_espelho():
     while True:
-        opcao = input(
-'''
+        opcao = input('''
+
 Qual Modelo? 
 (1) 3mm 
 (2) 4mm
@@ -30,7 +30,8 @@ Qual Modelo?
 (4) 4mm bisotado
 (5) retroiluminado
 (6) iluminação frontal 
-''')
+
+    ''')
 
         if opcao == '1':
             tipo = valor_3mm
