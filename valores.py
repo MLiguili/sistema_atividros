@@ -1,5 +1,12 @@
 """VALORES"""
 
+"""VALOR VIDROS QUADROS"""
+
+valor_vidro_comum = 250
+valor_vidro_anti_reflexo = 500
+valor_com_paspatour = 350
+valor_com_paspatour_e_anti_reflexo = 600
+
 """VALORES DE ESPELHOS"""
 
 valor_3mm = 300
